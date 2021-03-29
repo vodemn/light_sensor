@@ -15,3 +15,7 @@
 ## 2.0.0
 
 - Migrated to null-safety.
+
+## 2.0.1
+
+- Fixes pub scores warnings.
