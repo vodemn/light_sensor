@@ -1,3 +1,13 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+- Initial release.
+
+## 1.0.1
+
+- Cleaned up pubspec.yaml.
+- Added Lint.
+- Updated example.
+
+## 1.0.2
+
+- Updated Readme.
