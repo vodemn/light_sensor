@@ -1,15 +1,28 @@
-# light_sensor
+# Light sensor
 
-A new flutter plugin project.
+A Flutter plugin for Android allowing access to the device light sensor.
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+To use this plugin, add `light_sensor` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Example
 
+```dart
+// Import package
+import 'package:light_sensor/light_sensor.dart';
+
+// Init plugin:
+final LightSensor _light = LightSensor();
+
+// Subscribe on updates:
+_light.lightSensorStream.listen((lux) {...});
+```
+
+## Origin
+
+Originally, this plugin was based on [`light`](https://pub.dev/packages/light).  
+Functionality was extracted into this plugin due to lack of maintenance
+by the author of the `light` plugin.
+
+Today, the `light_sensor` plugin has been completely refreshed.
