@@ -24,7 +24,8 @@ class LightSensor {
   /// Getter for light stream, throws an exception if device isn't on Android platform
   Stream<int> get lightSensorStream {
     if (Platform.isAndroid) {
-      return _lightSensorStream ??= _eventChannel.receiveBroadcastStream().map<int>((lux) {
+      return _lightSensorStream ??=
+          _eventChannel.receiveBroadcastStream().map<int>((lux) {
         return lux as int;
       });
     }
