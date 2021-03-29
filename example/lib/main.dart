@@ -4,7 +4,7 @@ import 'package:light_sensor/light_sensor.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  MyApp({Key key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   final LightSensor _light = LightSensor();
 

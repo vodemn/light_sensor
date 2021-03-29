@@ -11,3 +11,7 @@
 ## 1.0.2
 
 - Updated Readme.
+
+## 2.0.0
+
+- Migrated to null-safety.
