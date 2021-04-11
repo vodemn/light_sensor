@@ -1,6 +1,6 @@
 name: light_sensor
 description: A Flutter plugin for Android allowing access to the device light sensor.
-version: 2.0.1
+version: 2.0.2
 repository: https://github.com/vodemn/light_sensor.git
 
 environment:
