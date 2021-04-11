@@ -2,7 +2,9 @@ package com.vodemn.light_sensor;
 
 import androidx.annotation.NonNull;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,14 +13,18 @@ import android.hardware.SensorManager;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+
+import java.io.InvalidObjectException;
 
 /** LightSensorPlugin */
-public class LightSensorPlugin implements FlutterPlugin, EventChannel.StreamHandler {
+public class LightSensorPlugin implements FlutterPlugin, EventChannel.StreamHandler, MethodChannel.MethodCallHandler {
   private SensorEventListener sensorEventListener = null;
   private SensorManager sensorManager = null;
   private Sensor sensor = null;
   private EventChannel eventChannel = null;
-  private static final String STEP_COUNT_CHANNEL_NAME = "light.eventChannel";
+  private MethodChannel sensorChannel;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -26,11 +32,14 @@ public class LightSensorPlugin implements FlutterPlugin, EventChannel.StreamHand
       Context context = flutterPluginBinding.getApplicationContext();
       sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
       sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+      BinaryMessenger binaryMessenger = flutterPluginBinding.getBinaryMessenger();
 
       /// Init event channel
-      BinaryMessenger binaryMessenger = flutterPluginBinding.getBinaryMessenger();
-      eventChannel = new EventChannel(binaryMessenger, STEP_COUNT_CHANNEL_NAME);
+      eventChannel = new EventChannel(binaryMessenger, "light.eventChannel");
       eventChannel.setStreamHandler(this);
+
+      sensorChannel = new MethodChannel(binaryMessenger, "system_feature");
+      sensorChannel.setMethodCallHandler(this);
   }
 
   @Override
@@ -66,5 +75,14 @@ public class LightSensorPlugin implements FlutterPlugin, EventChannel.StreamHand
               events.success(lux);
           }
       };
+  }
+
+  @Override
+  public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+    if (call.method.equals("sensor")) {
+        result.success(sensor != null);
+    } else {
+        result.notImplemented();
+    }
   }
 }
