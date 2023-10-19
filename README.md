@@ -1,5 +1,7 @@
 # Light sensor
 
+![Coverage](coverage_badge.svg)
+
 A Flutter plugin for Android allowing access to the device light sensor.
 
 ## Usage
@@ -12,11 +14,11 @@ To use this plugin, add `light_sensor` as a [dependency in your pubspec.yaml fil
 // Import package
 import 'package:light_sensor/light_sensor.dart';
 
-// Init plugin:
-final LightSensor _light = LightSensor();
+// Check sensor availability
+final bool hasSensor = await LightSensor.hasSensor();
 
-// Subscribe on updates:
-_light.lightSensorStream.listen((lux) {...});
+// Subscribe on updates
+LightSensor.luxStream().listen((lux) {...});
 ```
 
 ## Origin
