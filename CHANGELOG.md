@@ -1,3 +1,11 @@
+## 3.0.0
+
+- [BREAKING] Changed `hasSensor` getter to `hasSensor()`
+- [BREAKING] Changed `lightSensorStream` to `luxStream()`
+- Implemented tests
+- Renamed platform channels
+- Updated example
+
 ## 2.0.2
 
 - Added method 'hasSensor' to check, if device has light sensor.
