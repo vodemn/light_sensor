@@ -1,20 +1,20 @@
 import 'dart:async';
-import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class LightSensor {
+  @visibleForTesting
+  static const methodChannel = MethodChannel('com.vodemn.light_sensor');
+
+  @visibleForTesting
+  static const eventChannel = EventChannel("com.vodemn.light_sensor.stream");
+
   static Future<bool?> get hasSensor {
-    return const MethodChannel('system_feature').invokeMethod<bool?>('sensor');
+    return methodChannel.invokeMethod<bool?>('sensor');
   }
 
-  /// Getter for light stream, throws an exception if device isn't on Android platform
   static Stream<int> get lightSensorStream {
-    if (Platform.isAndroid) {
-      return const EventChannel("light.eventChannel").receiveBroadcastStream().map<int>((lux) {
-        return lux as int;
-      });
-    }
-    throw Exception('Light sensor API exclusively available on Android!');
+    return eventChannel.receiveBroadcastStream().map<int>((lux) => lux as int);
   }
 }

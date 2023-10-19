@@ -35,10 +35,10 @@ public class LightSensorPlugin implements FlutterPlugin, EventChannel.StreamHand
       BinaryMessenger binaryMessenger = flutterPluginBinding.getBinaryMessenger();
 
       /// Init event channel
-      eventChannel = new EventChannel(binaryMessenger, "light.eventChannel");
+      eventChannel = new EventChannel(binaryMessenger, "com.vodemn.light_sensor.stream");
       eventChannel.setStreamHandler(this);
 
-      sensorChannel = new MethodChannel(binaryMessenger, "system_feature");
+      sensorChannel = new MethodChannel(binaryMessenger, "com.vodemn.light_sensor");
       sensorChannel.setMethodCallHandler(this);
   }
 
