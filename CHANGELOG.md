@@ -1,3 +1,7 @@
+## 3.0.1
+
+- [Android] Added namespace to build.gradle.
+
 ## 3.0.0
 
 - [BREAKING] Changed `hasSensor` getter to `hasSensor()`
